@@ -33,6 +33,10 @@ func main() {
 			userId, _ := c.Get("user_id")
 			c.JSON(200, gin.H{"your_id": userId})
 		})
+		protected.POST("/events", api.CreateEvent)
+		protected.GET("/events", api.GetEvents)
+		protected.GET("/events/:id", api.GetEventByID)
+
 	}
 	
 

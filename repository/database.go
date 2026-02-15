@@ -33,32 +33,5 @@ func ConnectDatabase() {
 
 	log.Println("Running migrations...")
 	DB.AutoMigrate(&models.User{})
-
-
-	// dsn := "host=" + os.Getenv("DB_HOST") +
-	// 	" user=" + os.Getenv("DB_USER") +
-	// 	" password=" + os.Getenv("DB_PASSWORD") +
-	// 	" dbname=" + os.Getenv("DB_NAME") +
-	// 	" port=" + os.Getenv("DB_PORT") +
-	// 	" sslmode=disable"
-
-	// var database *gorm.DB
-	// 
-
-	// for i := 0; i < 10; i++ {
-	// 	database, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	// 	if err == nil {
-	// 		log.Println("Database connected")
-	// 		break
-	// 	}
-	// 	log.Println("Waiting for database...")
-	// 	time.Sleep(2 * time.Second)
-	// }
-
-	// if err != nil {
-	// 	log.Fatal("Failed to connect to database:", err)
-	// }
-
-	// database.AutoMigrate(&models.Event{})
-	// DB = database
+	DB.AutoMigrate(&models.Event{})
 }

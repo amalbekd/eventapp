@@ -47,7 +47,10 @@ func AuthMiddleware() gin.HandlerFunc {
 		}
 		
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-			c.Set("user_id", claims["user_id"])
+			if val, ok := claims["user_id"].(float64); ok {
+        		userID := uint(val)
+        		c.Set("user_id", userID) // Теперь в контексте лежит uint
+    		}
 			c.Next()
 		} else {
 			fmt.Println("Token claims invalid")

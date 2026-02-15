@@ -23,12 +23,12 @@ func CheckPassword(password, hash string) bool {
 	return err == nil
 }
 
-func generateToken(userID uint, role string) (string, error) { // добавили role
+func generateToken(userID uint, role string) (string, error) { 
 	secret := strings.TrimSpace(os.Getenv("JWT_SECRET"))
 	
 	claims := jwt.MapClaims{
 		"user_id": userID,
-		"role":    role, // теперь роль настоящая
+		"role":    role,
 		"exp":     time.Now().Add(time.Hour * 72).Unix(),
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
