@@ -5,8 +5,9 @@ import (
 	"base/service"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 func CreateEvent(c *gin.Context) {
@@ -54,4 +55,39 @@ func GetEventByID(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, event)
+}
+
+func UpdateEvent(c *gin.Context) {
+	id := c.Param("id")
+
+	eventID, _ := strconv.ParseUint(id, 10, 32)
+
+	var input models.Event
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	userID := c.MustGet("user_id").(uint)
+	updatedEvent, err := service.UpdateEvent(userID, uint(eventID), input)
+	if err != nil {
+		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, updatedEvent)
+}
+
+func DeleteEvent(c *gin.Context) {
+	id := c.Param("id")
+	eventID, _ := strconv.ParseUint(id, 10, 32)
+
+	userID := c.MustGet("user_id").(uint)
+
+	if err := service.DeleteEvent(userID, uint(eventID)); err != nil {
+		c.JSON(http.StatusForbidden, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Event deleted successfully"})
 }

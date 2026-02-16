@@ -36,14 +36,10 @@ func main() {
 		protected.POST("/events", api.CreateEvent)
 		protected.GET("/events", api.GetEvents)
 		protected.GET("/events/:id", api.GetEventByID)
-
+		protected.PUT("/events/:id", api.UpdateEvent)
+		protected.DELETE("/events/:id", api.DeleteEvent)
 	}
 	
-
-	// r.GET("/events", api.GetEvents)
-	// r.POST("/events", api.CreateEvent)
-	// r.GET("/events/:id", api.GetEventByID)
-	// r.DELETE("/events/:id", api.DeleteEvent)
 	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	fmt.Println("Server running on port 8080")
 	r.Run(":8080")
