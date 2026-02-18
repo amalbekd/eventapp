@@ -18,3 +18,18 @@ func GetUserRegistrations(userID uint) ([]models.Registration, error) {
 	return regs, err
 }
 
+func GetRegistrationsByEvent(eventID uint) ([]models.Registration, error) {
+	var regs []models.Registration
+	err := DB.Preload("User").Where("event_id = ?", eventID).Find(&regs).Error
+	return regs, err
+}
+
+func GetRegistrationByID(regID uint) (*models.Registration, error) {
+	var reg models.Registration
+	err := DB.Preload("Event").First(&reg, regID).Error
+	return &reg, err
+}
+
+func UpdateRegistration(reg *models.Registration) error {
+	return DB.Save(reg).Error
+}
