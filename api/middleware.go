@@ -23,13 +23,13 @@ func AuthMiddleware() gin.HandlerFunc {
 		tokenString = strings.TrimSpace(tokenString) // Убираем лишние пробелы
 
 		// ПЕЧАТАЕМ ТОКЕН В КОНСОЛЬ (для проверки)
-		fmt.Println("Token received:", tokenString)
-		fmt.Println("Secret used:", os.Getenv("JWT_SECRET"))
-		// ПЕЧАТАЕМ ТОКЕН В КОНСОЛЬ (для отладки)
-		fmt.Println("--- DEBUG TOKEN ---")
-		fmt.Printf("Received token: [%s]\n", tokenString)
-		fmt.Printf("Token Length: %d\n", len(tokenString))
-		fmt.Println("-------------------")
+		// fmt.Println("Token received:", tokenString)
+		// fmt.Println("Secret used:", os.Getenv("JWT_SECRET"))
+		// // ПЕЧАТАЕМ ТОКЕН В КОНСОЛЬ (для отладки)
+		// fmt.Println("--- DEBUG TOKEN ---")
+		// fmt.Printf("Received token: [%s]\n", tokenString)
+		// fmt.Printf("Token Length: %d\n", len(tokenString))
+		// fmt.Println("-------------------")
 
 		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 			// Проверяем метод подписи

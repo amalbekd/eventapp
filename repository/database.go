@@ -34,4 +34,5 @@ func ConnectDatabase() {
 	log.Println("Running migrations...")
 	DB.AutoMigrate(&models.User{})
 	DB.AutoMigrate(&models.Event{})
+	DB.AutoMigrate(&models.Registration{})
 }

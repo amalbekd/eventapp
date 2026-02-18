@@ -38,6 +38,8 @@ func main() {
 		protected.GET("/events/:id", api.GetEventByID)
 		protected.PUT("/events/:id", api.UpdateEvent)
 		protected.DELETE("/events/:id", api.DeleteEvent)
+		protected.POST("/events/:id/apply", api.ApplyToEvent)
+		protected.GET("my/events", api.GetMyRegistrations)
 	}
 	
 	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
